@@ -192,9 +192,8 @@ class ResizeObservation(gym.ObservationWrapper):
         self.observation_space = Box(low=0, high=255, shape=obs_shape, dtype=np.uint8)
 
     def observation(self, observation):
-        observation = torch.tensor(observation, dtype=torch.float)
         transforms = T.Compose(
-            [T.Resize(self.shape, interpolation=Image.BILINEAR), T.Normalize(0, 255)]
+            [T.Resize(self.shape), T.Normalize(0, 255)]
         )
         observation = transforms(observation).squeeze(0)
         return observation
@@ -313,6 +312,7 @@ class Mario:
 
         # EXPLOIT
         else:
+            state = state.__array__()
             if self.use_cuda:
                 state = torch.tensor(state).cuda()
             else:
@@ -363,6 +363,8 @@ class Mario(Mario):  # subclassing for continuity
         reward (float),
         done(bool))
         """
+        state = state.__array__()
+        next_state = next_state.__array__()
 
         if self.use_cuda:
             state = torch.tensor(state).cuda()
@@ -725,7 +727,9 @@ class MetricLogger:
 # Let’s play!
 # """""""""""""""
 #
-
+# In this example we run the training loop for 10 episodes, but for Mario to truly learn the ways of
+# his world, we suggest running the loop for at least 40,000 episodes!
+#
 use_cuda = torch.cuda.is_available()
 print(f"Using CUDA: {use_cuda}")
 print()
@@ -737,9 +741,7 @@ mario = Mario(state_dim=(4, 84, 84), action_dim=env.action_space.n, save_dir=sav
 
 logger = MetricLogger(save_dir)
 
-episodes = 40000
-
-### for Loop that train the model num_episodes times by playing the game
+episodes = 10
 for e in range(episodes):
 
     state = env.reset()
@@ -773,3 +775,12 @@ for e in range(episodes):
 
     if e % 4 == 0:
         logger.record(episode=e, epsilon=mario.exploration_rate, step=mario.curr_step)
+
+
+######################################################################
+# Conclusion
+# """""""""""""""
+#
+# In this tutorial, we saw how we can use torch and torchvision to train a game-playing AI. You can use the same approach
+# to train an AI to play any of the games at the `OpenAI gym <https://gym.openai.com/>`__. Hope you enjoyed this tutorial, feel free to reach out to us at
+# `our github <https://github.com/yuansongFeng/MadMario/>`__!

@@ -116,6 +116,13 @@ Welcome to PyTorch Tutorials
    :image: _static/img/thumbnails/cropped/torchaudio-Tutorial.png
    :link: beginner/audio_preprocessing_tutorial.html
    :tags: Audio
+   
+.. customcarditem::
+   :header: Speech Command Recognition
+   :card_description: Learn how to correctly format an audio dataset and then train/test an audio classifier network on the dataset.
+   :image: _static/img/thumbnails/cropped/torchaudio-speech.png
+   :link: intermediate/speech_command_recognition_with_torchaudio.html
+   :tags: Audio
 
 .. Text
 
@@ -334,13 +341,6 @@ Welcome to PyTorch Tutorials
    :tags: Parallel-and-Distributed-Training
 
 .. customcarditem::
-   :header: (advanced) PyTorch 1.0 Distributed Trainer with Amazon AWS
-   :card_description: Set up the distributed package of PyTorch, use the different communication strategies, and go over some the internals of the package.
-   :image: _static/img/thumbnails/cropped/advanced-PyTorch-1point0-Distributed-Trainer-with-Amazon-AWS.png
-   :link: beginner/aws_distributed_training_tutorial.html
-   :tags: Parallel-and-Distributed-Training
-
-.. customcarditem::
    :header: Writing Distributed Applications with PyTorch
    :card_description: Set up the distributed package of PyTorch, use the different communication strategies, and go over some the internals of the package.
    :image: _static/img/thumbnails/cropped/Writing-Distributed-Applications-with-PyTorch.png
@@ -475,6 +475,8 @@ Additional Resources
    :caption: Audio
 
    beginner/audio_preprocessing_tutorial
+   intermediate/speech_command_recognition_with_torchaudio
+   
 
 .. toctree::
    :maxdepth: 2
@@ -550,7 +552,6 @@ Additional Resources
    intermediate/ddp_tutorial
    intermediate/dist_tuto
    intermediate/rpc_tutorial
-   beginner/aws_distributed_training_tutorial
    intermediate/rpc_param_server_tutorial
    intermediate/dist_pipeline_parallel_tutorial
    intermediate/rpc_async_execution
